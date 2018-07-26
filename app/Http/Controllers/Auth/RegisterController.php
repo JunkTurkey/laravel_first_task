@@ -66,12 +66,13 @@ class RegisterController extends Controller
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 1,
+            'role' => $data['asadmin'] = 'on' ? 2 : 1,
         ]);
     }
 
     public function register(Request $request)
     {
+        //dd($request->get('asadmin'));
         $user = $this->create($request->all());
         return 'workingview';
     }

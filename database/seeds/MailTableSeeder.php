@@ -13,11 +13,11 @@ class MailTableSeeder extends Seeder
     {
         DB::table('mails')->insert([
             'mail' => str_random(16),
-            'user_id' => 4,
+            'user_id' => 1,
         ]);
         DB::table('mails')->insert([
             'mail' => str_random(16),
-            'user_id' => 5,
+            'user_id' => 2,
         ]);
     }
 }
