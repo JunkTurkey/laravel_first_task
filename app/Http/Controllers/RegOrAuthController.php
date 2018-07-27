@@ -28,8 +28,14 @@ class RegOrAuthController extends Controller
 
         $reqpass = $request->get('password');
         $userpass = $user->password;
-        if ($reqpass == $userpass)
-            return 'auth';
+        if ($reqpass == $userpass) {
+            if ($user->role == 2) {
+                $users = DB::table('users')->get();
+                return view('workingview', ['users' => $users]);
+            }
+            else
+                return view('userview');
+        }
         return 'not lol';
     }
 }

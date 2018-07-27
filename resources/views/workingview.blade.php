@@ -9,8 +9,16 @@
         <td>id</td>
         <td>email</td>
         <td>role</td>
-        <td>message</td>
     </tr>
+
+    <?php foreach ($users as $user) : ?>
+    <tr>
+            <td><?= $user->email; ?> </td>
+            <td><?= $user->password; ?> </td>
+            <td><?= DB::table('roles')->where('id', $user->role)->first()->name; ?> </td>
+    </tr>
+    <?php endforeach; ?>
+
 </table>
 </body>
 
