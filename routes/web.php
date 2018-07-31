@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('registerform');
 });
 
-Route::post('/register', 'RegOrAuthController@regOrAuth');
+Route::post('/register', 'RegOrAuthController@register');
+
+Route::post('/authorization', 'RegOrAuthController@auth');

@@ -18,23 +18,46 @@ class RegOrAuthController extends Controller
         ]);
     }
 
-    public function regOrAuth(Request $request){
-        $user = DB::table('users')->where('email', $request->get('email'))->first();
-        if ($user == null) {
-            $this->create($request->all());
-            return 'reg';
-        }
-        //dd($userpass);
+//    public function regOrAuth(Request $request){
+//        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
+//
+//        if ($userInDB == null) {
+//            $user = new User($request->only('email', 'password', 'role'));
+//            session(['user' => $user]);
+//            return $this->register($user);
+//        }
+//
+//        else if ($request->get('password') == $userInDB->password) {
+//            $user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
+//            session(['user' => $user]);
+//            return $this->auth($user);
+//        }
+//
+//        return 'not lol';
+//    }
 
-        $reqpass = $request->get('password');
-        $userpass = $user->password;
-        if ($reqpass == $userpass) {
+    public function auth(Request $request){
+        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
+        if ($request->get('password') == $userInDB->password) {
+            $user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
+            session(['user' => $user]);
             if ($user->role == 2) {
                 $users = DB::table('users')->get();
                 return view('workingview', ['users' => $users]);
             }
             else
                 return view('userview');
+        }
+        return 'not lol';
+    }
+
+    public function register(Request $request){
+        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
+
+        if ($userInDB == null) {
+            $user = new User($request->only('email', 'password', 'role'));
+            session(['user' => $user]);
+            return $this->create($user);
         }
         return 'not lol';
     }
