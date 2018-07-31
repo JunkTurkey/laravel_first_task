@@ -12,7 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('registerform');
+    return view('firstpage');
 });
 
-Route::post('/register', 'RegOrAuthController@regOrAuth');
+Route::get('/regi', view('registerform'));
+
+Route::get('/autho', view('authform'));
+
+Route::post('/register', 'RegOrAuthController@register');
+
+Route::post('/authorization', 'RegOrAuthController@auth');
+
+Route::post('/sendmail', 'UserController@sendMail');
+

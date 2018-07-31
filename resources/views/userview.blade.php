@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>fuck u</title>
+    <title>user</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <input id="email" name="email" type="text" placeholder="example@your.domen" required>
     </div>
     <div>
-        <input id="message" name="message" type="text" placeholder="your message" required>
+        <input id="message" name="message" type="text" placeholder="your message"  required>
     </div>
     <div>
         <button type="submit">send</button>
