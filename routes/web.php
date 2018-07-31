@@ -12,9 +12,20 @@
 */
 
 Route::get('/', function () {
+    return view('firstpage');
+});
+
+Route::get('/autho', function () {
+    return view('authform');
+});
+
+Route::get('/regi', function () {
     return view('registerform');
 });
 
 Route::post('/register', 'RegOrAuthController@register');
 
 Route::post('/authorization', 'RegOrAuthController@auth');
+
+Route::post('/sendmail', 'UserController@sendMail');
+//

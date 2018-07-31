@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Hash;
 use App\User;
+use Illuminate\Support\Facades\Redirect;
 
 class RegOrAuthController extends Controller
 {
@@ -62,3 +63,4 @@ class RegOrAuthController extends Controller
         return 'not lol';
     }
 }
+

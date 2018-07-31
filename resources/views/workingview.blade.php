@@ -1,6 +1,6 @@
 <html>
 
-<head><title>fucking u</title></head>
+<head><title>admin</title></head>
 
 <body>
 <h1>fucking u right now</h1>
@@ -16,6 +16,7 @@
             <td><?= $user->email; ?> </td>
             <td><?= $user->password; ?> </td>
             <td><?= DB::table('roles')->where('id', $user->role)->first()->name; ?> </td>
+            <td><a href="/viewmails/{id}">view</a> </td>
     </tr>
     <?php endforeach; ?>
 
