@@ -38,9 +38,10 @@ class RegOrAuthController extends Controller
 //    }
 
     public function auth(Request $request){
-        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
-        if ($request->get('password') == $userInDB->password) {
-            $user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
+        $user = DB::table('users')->where('email', $request->get('email'))->first();
+        if ($request->get('password') == $user->password) {
+            //$user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
+            //dd($user->role);
             session(['user' => $user]);
             if ($user->role == 2) {
                 $users = DB::table('users')->get();
@@ -53,13 +54,11 @@ class RegOrAuthController extends Controller
     }
 
     public function register(Request $request){
-        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
+        $user = DB::table('users')->where('email', $request->get('email'))->first();
 
-        if ($userInDB == null) {
-            $user = new User($request->only('email', 'password', 'role'));
-            session(['user' => $user]);
+        if ($user == null)
             return $this->create($user);
-        }
+
         return 'not lol';
     }
 }
