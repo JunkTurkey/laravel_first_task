@@ -16,9 +16,6 @@
         <input id="password" name="password" type="password" placeholder="password" required>
     </div>
     <div>
-        <input type="checkbox" id="asadmin" name="asadmin">
-    </div>
-    <div>
         <button type="submit">in</button>
     </div>
 </form>

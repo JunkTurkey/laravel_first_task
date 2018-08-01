@@ -28,4 +28,5 @@ Route::post('/register', 'RegOrAuthController@register');
 Route::post('/authorization', 'RegOrAuthController@auth');
 
 Route::post('/sendmail', 'UserController@sendMail');
-//
+
+Route::get('/viewmails/{id}', 'AdminController@lookMessages');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Hash;
 use App\User;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class RegOrAuthController extends Controller
 {
@@ -15,35 +15,28 @@ class RegOrAuthController extends Controller
         return User::create([
             'email' => $data['email'],
             'password' => $data['password'],
-            'role' => $data['asadmin'] = 'on' ? 2 : 1,
+            'role' => 1,
         ]);
     }
 
-//    public function regOrAuth(Request $request){
-//        $userInDB = DB::table('users')->where('email', $request->get('email'))->first();
-//
-//        if ($userInDB == null) {
-//            $user = new User($request->only('email', 'password', 'role'));
-//            session(['user' => $user]);
-//            return $this->register($user);
-//        }
-//
-//        else if ($request->get('password') == $userInDB->password) {
-//            $user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
-//            session(['user' => $user]);
-//            return $this->auth($user);
-//        }
-//
-//        return 'not lol';
-//    }
+    public function validateThis(array $data){
+        return Validator::make($data, [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+    }
 
     public function auth(Request $request){
+
+        if ($this->validateThis($request->all())->fails())
+            return 'wrong input';
         $user = DB::table('users')->where('email', $request->get('email'))->first();
         if ($request->get('password') == $user->password) {
             //$user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
             //dd($user->role);
             session(['user' => $user]);
-            if ($user->role == 2) {
+            $asadmin = $request->get('asadmin');
+            if ($asadmin!=null && $user->role == 2) {
                 $users = DB::table('users')->get();
                 return view('workingview', ['users' => $users]);
             }
@@ -54,11 +47,14 @@ class RegOrAuthController extends Controller
     }
 
     public function register(Request $request){
+        //dd($request->all());
+        if ($this->validateThis($request->all())->fails())
+            return 'wrong input';
         $user = DB::table('users')->where('email', $request->get('email'))->first();
-
-        if ($user == null)
-            return $this->create($user);
-
+        if ($user == null) {
+            $this->create($request->only('email', 'password', 'asadmin'));
+            return view ('firstpage');
+        }
         return 'not lol';
     }
 }

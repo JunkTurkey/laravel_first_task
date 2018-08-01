@@ -16,7 +16,7 @@
             <td><?= $user->email; ?> </td>
             <td><?= $user->password; ?> </td>
             <td><?= DB::table('roles')->where('id', $user->role)->first()->name; ?> </td>
-            <td><a href="/viewmails/{id}">view</a> </td>
+            <td><a href=" {{ url('/viewmails/'.$user->id)  }}">view mails</a> </td>
     </tr>
     <?php endforeach; ?>
 
