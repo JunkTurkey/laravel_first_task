@@ -20,6 +20,7 @@ class RegOrAuthController extends Controller
     }
 
     public function validateThis(array $data){
+
         return Validator::make($data, [
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
@@ -32,8 +33,6 @@ class RegOrAuthController extends Controller
             return 'wrong input';
         $user = DB::table('users')->where('email', $request->get('email'))->first();
         if ($request->get('password') == $user->password) {
-            //$user = new User([$userInDB->email, $userInDB->password, $userInDB->role]);
-            //dd($user->role);
             session(['user' => $user]);
             $asadmin = $request->get('asadmin');
             if ($asadmin!=null && $user->role == 2) {
@@ -47,7 +46,7 @@ class RegOrAuthController extends Controller
     }
 
     public function register(Request $request){
-        //dd($request->all());
+
         if ($this->validateThis($request->all())->fails())
             return 'wrong input';
         $user = DB::table('users')->where('email', $request->get('email'))->first();
