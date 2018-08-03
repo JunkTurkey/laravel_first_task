@@ -1,16 +1,20 @@
 <html>
 
+@extends('layouts.layout')
 <head><title>admin</title></head>
 
 <body>
 <h1>fucking u right now</h1>
-<table>
+<div>
+<table class="table table-hover">
+    <thead class="thead-light">
     <tr>
         <td>id</td>
         <td>email</td>
         <td>role</td>
+        <td></td>
     </tr>
-
+    </thead>
     <?php foreach ($users as $user) : ?>
     <tr>
             <td><?= $user->email; ?> </td>
@@ -21,6 +25,7 @@
     <?php endforeach; ?>
 
 </table>
+</div>
 </body>
 
 </html>
