@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Notifications\PlannedNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Notification;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -26,10 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->call(function (){
-             Notification::send('', new PlannedNotification());
-         })->everyMinute();
-        //          ->hourly();
+         $schedule->command('telega:sendtelega')->everyMinute();
     }
 
     /**
