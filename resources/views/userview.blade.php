@@ -6,7 +6,10 @@
 
 <body>
 <h1>Welcome, user</h1>
+
+
 <div>
+    <img src="{{ asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) }}" >
 </div>
 <form method="post" enctype="multipart/form-data" action="{{ url('/uploadPicture') }}" >
     @csrf

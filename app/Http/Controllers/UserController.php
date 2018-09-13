@@ -29,12 +29,12 @@ class UserController extends Controller
     }
 
     public function uploadPicture(Request $request){
-        dd($request->file('picture'));
+        //dd($request->file('picture'));
         $user = session('user');
-        $path = $request->file('picture')->store('pictures');
-        DB::table('picture')->insert(['picture' => $path]);
+        $path = $request->file('picture')->store("", 'public');
+        DB::table('picture')->insert(['picture_path' => $path]);
         DB::table('users')->where('id', $user->id)->update(['picture_id' =>
-            DB::table('picture')->where('picture', $path)->first()->id]);
-        return view('userview');
+            DB::table('picture')->where('picture_path', $path)->first()->id]);
+        return view('userview', ['user' => $user]);
     }
 }

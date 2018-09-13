@@ -40,7 +40,7 @@ class RegOrAuthController extends Controller
                 return view('workingview', ['users' => $users]);
             }
             else
-                return view('userview');
+                return view('userview', ['user' => $user]);
         }
         return 'not lol';
     }
