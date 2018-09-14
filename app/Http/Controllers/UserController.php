@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Mail\UserMail;
+use App\Mails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -20,10 +21,9 @@ class UserController extends Controller
 
         $user = session('user');
         if ($this->validateEmail($request->all())->passes()){
-            Mail::to($request->get('email'))->send(new UserMail($user));
-            DB::table('mails')->insert(['mail' => $request->get('message'), 'user_id' => DB::table('users')->
+            $this->createMail(['mail' => $request->get('message'), 'user_id' => DB::table('users')->
                 where('email', $user->email)->first()->id]);
-            return 'lol';
+            return view('userview', ['user' => session('user')]);
         }
         return 'not lol';
     }
@@ -36,5 +36,12 @@ class UserController extends Controller
         DB::table('users')->where('id', $user->id)->update(['picture_id' =>
             DB::table('picture')->where('picture_path', $path)->first()->id]);
         return view('userview', ['user' => $user]);
+    }
+
+    protected function createMail(array $data){
+        return Mails::create([
+            'mail' => $data['mail'],
+            'user_id' => $data['user_id'],
+        ]);
     }
 }

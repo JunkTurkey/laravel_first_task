@@ -21,7 +21,7 @@
             <td><?= $user->email; ?> </td>
             <td><?= $user->password; ?> </td>
             <td><?= $userrole = DB::table('roles')->where('id', $user->role)->first()->name; ?> </td>
-            <td>picture</td>
+            <td><img src="{{ asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) }}" ></td>
             <td><a href=" {{ url('/viewmails/'.$user->id)  }}">view mails</a> </td>
             <td><a href=" {{ url('/appointAs/'.$user->id) }}">appoint as
                     <?php echo($userrole=="admin" ? "user" : "admin") ?></a></td>

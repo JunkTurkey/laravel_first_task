@@ -45,8 +45,8 @@ class PlannedNotification extends Notification
     {
         $data= DB::table('mails')->latest()->first();
         $sender = DB::table('users')->where('id', $data->user_id)->first();
-        return TelegramMessage::create()->to('528060187')->content('sender: '.$sender->email.'; message: '
-            .$data->mail.'; created at: '.$data->created_at);
+        return TelegramMessage::create()->to('528060187')->content("sender: ".$sender->email.";".
+            PHP_EOL." message: ".$data->mail.";".PHP_EOL." created at: ".$data->created_at);
     }
 
     /**
