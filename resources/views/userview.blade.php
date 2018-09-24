@@ -6,11 +6,10 @@
 
 <body>
 <h1>Welcome, user</h1>
-
-
 <div>
     <img src="{{ asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) }}" >
 </div>
+
 <form method="post" enctype="multipart/form-data" action="{{ url('/uploadPicture') }}" >
     @csrf
     <div>
@@ -23,6 +22,8 @@
         <button type="submit">upload</button>
     </div>
 </form>
+<div id="App"></div>
+<script src="js/app.js"></script>
 <h3>Send email mutherfucker</h3>
 <form method="post" action="{{ url('/sendmail') }}" >
     @csrf
