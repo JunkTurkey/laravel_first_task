@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email', 30);
-            $table->string('password', 60);
+            $table->string('email', 64);
+            $table->string('password', 128);
             $table->unsignedInteger('role');
             $table->unsignedInteger('picture_id')->nullable();
             $table->timestamps();
@@ -27,12 +27,12 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });
-        Schema::create('roles', function (Blueprint $table) {
+        /*Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
-        });
-        Schema::create('picture', function (Blueprint $table) {
+        });*/
+        Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('picture_path');
             $table->timestamps();
@@ -41,8 +41,8 @@ class CreateUsersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('users', function (Blueprint $table){
-            $table->foreign('role')->references('id')->on('roles');
-            $table->foreign('picture_id')->references('id')->on('picture');
+//            $table->foreign('role')->references('id')->on('roles');
+            $table->foreign('picture_id')->references('id')->on('pictures');
         });
     }
 
@@ -58,11 +58,11 @@ class CreateUsersTable extends Migration
         });
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['picture_id']);
-            $table->dropForeign(['role']);
+//            $table->dropForeign(['role']);
         });
         Schema::dropIfExists('mails');
-        Schema::dropIfExists('picture');
+        Schema::dropIfExists('pictures');
         Schema::dropIfExists('users');
-        Schema::dropIfExists('roles');
+//        Schema::dropIfExists('roles');
     }
 }

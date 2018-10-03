@@ -6,14 +6,16 @@
 
 <body>
 <h1>Welcome, user</h1>
+
 <div>
-    <img src="{{ asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) }}" >
+    <?php $user = Auth::user(); $picture = $user->picture->picture_path  ?>
+   <img src="{{ asset($picture) }}" >    <!-- asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) -->
 </div>
 
 <form method="post" enctype="multipart/form-data" action="{{ url('/uploadPicture') }}" >
     @csrf
     <div>
-        <label>user select picture to upload</label>
+        <label>select picture to upload</label>
     </div>
     <div>
         <input type="file" name="picture" id="picture" >
@@ -24,7 +26,7 @@
 </form>
 <div id="App"></div>
 <script src="js/app.js"></script>
-<h3>Send email mutherfucker</h3>
+<h3>Send email</h3>
 <form method="post" action="{{ url('/sendmail') }}" >
     @csrf
     <div>

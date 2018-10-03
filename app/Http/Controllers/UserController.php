@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use DB;
-use App\Mail\UserMail;
+use App\User;
 use App\Mails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -29,12 +31,13 @@ class UserController extends Controller
     }
 
     public function uploadPicture(Request $request){
-        //dd($request->file('picture'));
-        $user = session('user');
+        $user = Auth::user();
         $path = $request->file('picture')->store("", 'public');
-        DB::table('picture')->insert(['picture_path' => $path]);
+        /*DB::table('picture')->insert(['picture_path' => $path]);
         DB::table('users')->where('id', $user->id)->update(['picture_id' =>
-            DB::table('picture')->where('picture_path', $path)->first()->id]);
+            DB::table('picture')->where('picture_path', $path)->first()->id]);*/
+        $picture = Picture::create(['picture_path' => $path]);
+        User::where('id', $user->id)->update(['picture_id' => $picture->id]);
         return view('userview', ['user' => $user]);
     }
 

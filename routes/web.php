@@ -19,11 +19,11 @@ Route::get('/autho', function () {
     return view('authform');
 });
 
-Route::get('/regi', function () {
+/*Route::get('/regi', function () {
     return view('registerform');
-});
+});*/
 
-Route::post('/register', 'RegOrAuthController@register');
+/*Route::post('/register', 'RegOrAuthController@register');*/
 
 Route::post('/authorization', 'RegOrAuthController@auth');
 

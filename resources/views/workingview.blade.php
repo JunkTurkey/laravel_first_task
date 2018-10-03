@@ -4,8 +4,8 @@
 <head><title>admin</title></head>
 
 <body>
-<h1>fucking u right now</h1>
 <div>
+    <?php dd(Auth::user()) ?>
 <table class="table table-hover">
     <thead class="thead-light">
     <tr>

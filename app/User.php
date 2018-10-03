@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $fillable = ['email', 'password', 'role'];
 
@@ -14,6 +14,10 @@ class User extends Model
     }*/
 
     public function picture(){
-        return $this->hasOne('App\Pictures');
+        return $this->hasOne('App\Picture', 'id', 'picture_id');
+    }
+
+    public function getRoleAttribute($value){
+        return $value == 1 ? 'user' : 'admin';
     }
 }

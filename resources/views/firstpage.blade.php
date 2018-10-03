@@ -5,9 +5,9 @@
 </head>
 
 <body>
-<h1>FUCK U</h1>
-<a href="{{ url('autho') }}" >auth</a>
-<a href="{{ url('regi') }}" >reg</a>
+
+<a href="{{ url('autho') }}" >singing</a>
+
 </body>
 
 </html>
