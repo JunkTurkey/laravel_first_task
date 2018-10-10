@@ -12,6 +12,8 @@
 */
 
 Route::get('/', function () {
+    if (Auth::check())
+        return redirect('/user');
     return view('firstpage');
 });
 
@@ -29,8 +31,22 @@ Route::post('/authorization', 'RegOrAuthController@auth');
 
 Route::post('/sendmail', 'UserController@sendMail');
 
+Route::get('/user', function (){
+   return view('userview');
+});
+
 Route::get('/viewmails/{id}', 'AdminController@lookMessages');
 
 Route::get('/appointAs/{id}', 'AdminController@appointAs');
 
 Route::post('/uploadPicture/', 'UserController@uploadPicture');
+
+Route::get('/admin', function (){
+    $users = App\User::all();
+    return view('workingview', ['users' => $users]);
+})->middleware('admin');
+
+Route::get('/signout', function (){
+   Auth::logout();
+   return redirect('/');
+});

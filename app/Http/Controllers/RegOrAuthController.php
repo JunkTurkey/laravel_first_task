@@ -35,13 +35,13 @@ class RegOrAuthController extends Controller
         else {
             $credentials = ['email' => $request->email, 'password' => $request->password];
             $credentials1 = $request->only('email', 'password');
-            if (Auth::attempt($credentials)) {
-                return view('userview');
+            if (Auth::attempt($credentials, true)) {
+                return redirect('/user');
             }
             else {
                 $this->create($credentials1);
-                Auth::attempt($credentials);
-                return view ('userview');
+                Auth::attempt($credentials, true);
+                return redirect('/user');
             }
         }
         /*$user = User::where('email', $request->get('email'))->first();

@@ -1,14 +1,17 @@
 <template>
     <div id="App">
         <FirstComponent/>
+        <MailFormComponent/>
     </div>
 </template>
 
 <script>
     import FirstComponent from "./FirstComponent";
+    import MailFormComponent from "./MailFormComponent";
+
     export default {
         name: "App",
-        components: {FirstComponent}
+        components: { MailFormComponent, FirstComponent }
     };
 </script>
 

@@ -17,8 +17,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email', 64);
             $table->string('password', 128);
-            $table->unsignedInteger('role');
+            $table->integer('role');
             $table->unsignedInteger('picture_id')->nullable();
+            $table->string('remember_token');
             $table->timestamps();
         });
         Schema::create('mails', function (Blueprint $table) {

@@ -20,17 +20,18 @@ class UserController extends Controller
     }
 
     public function sendMail(Request $request){
-
-        $user = session('user');
+        dd($request->all());
+        $user = Auth::user();
         if ($this->validateEmail($request->all())->passes()){
             $this->createMail(['mail' => $request->get('message'), 'user_id' => DB::table('users')->
                 where('email', $user->email)->first()->id]);
-            return view('userview', ['user' => session('user')]);
+            return redirect('/user');
         }
         return 'not lol';
     }
 
     public function uploadPicture(Request $request){
+
         $user = Auth::user();
         $path = $request->file('picture')->store("", 'public');
         /*DB::table('picture')->insert(['picture_path' => $path]);
@@ -38,7 +39,7 @@ class UserController extends Controller
             DB::table('picture')->where('picture_path', $path)->first()->id]);*/
         $picture = Picture::create(['picture_path' => $path]);
         User::where('id', $user->id)->update(['picture_id' => $picture->id]);
-        return view('userview', ['user' => $user]);
+        return redirect('/user');
     }
 
     protected function createMail(array $data){
