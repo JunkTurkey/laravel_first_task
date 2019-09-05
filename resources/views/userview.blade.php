@@ -1,24 +1,36 @@
 <html>
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>user</title>
 </head>
 
 <body>
-<h1>Send email mutherfucker</h1>
-<form method="post" action="{{ url('/sendmail') }}" >
-    @csrf
+<h3>Welcome, user</h3>
+<a href="{{ url('/sideTasks') }}" >side tasks</a>
+<a href="{{ url('/admin') }}">admin mode</a>
+<div>
+    <?php $user = Auth::user(); ?>
+   <img src="{{ asset($user->picture->picture_path) }}" >    <!-- asset('/storage/'.DB::table('picture')->where('id', $user->picture_id)->first()->picture_path) -->
+</div>
+
+<form method="post" enctype="multipart/form-data" action="{{ url('/uploadPicture') }}" >
 
     <div>
-        <input id="email" name="email" type="text" placeholder="example@your.domen" required>
+        <label>select picture to upload</label>
     </div>
     <div>
-        <input id="message" name="message" type="text" placeholder="your message"  required>
+        <input type="file" name="picture" id="picture" >
     </div>
     <div>
-        <button type="submit">send</button>
+        <button type="submit">upload</button>
     </div>
 </form>
+
+<div id="App"><App/></div>
+<script src="js/app.js"></script>
+
+<a href="{{ url('/signout') }}">sign out</a>
 </body>
 
 </html>

@@ -1,11 +1,11 @@
 <html>
 
 <head>
-    <title>fuck u</title>
+    <title>authform</title>
 </head>
 
 <body>
-<h1>FUCK U</h1>
+<h1>authform</h1>
 <form method="post" action="{{ url('/authorization') }}" >
     @csrf
 

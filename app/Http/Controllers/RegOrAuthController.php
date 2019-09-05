@@ -7,6 +7,7 @@ use DB;
 use Hash;
 use App\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RegOrAuthController extends Controller
 {
@@ -14,7 +15,7 @@ class RegOrAuthController extends Controller
     {
         return User::create([
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => Hash::make($data['password']),
             'role' => 1,
         ]);
     }
@@ -31,7 +32,19 @@ class RegOrAuthController extends Controller
 
         if ($this->validateThis($request->all())->fails())
             return 'wrong input';
-        $user = DB::table('users')->where('email', $request->get('email'))->first();
+        else {
+            $credentials = ['email' => $request->email, 'password' => $request->password];
+            $credentials1 = $request->only('email', 'password');
+            if (Auth::attempt($credentials, true)) {
+                return redirect('/user');
+            }
+            else {
+                $this->create($credentials1);
+                Auth::attempt($credentials, true);
+                return redirect('/user');
+            }
+        }
+        /*$user = User::where('email', $request->get('email'))->first();
         if ($request->get('password') == $user->password) {
             session(['user' => $user]);
             $asadmin = $request->get('asadmin');
@@ -40,21 +53,21 @@ class RegOrAuthController extends Controller
                 return view('workingview', ['users' => $users]);
             }
             else
-                return view('userview');
+                return view('userview', ['user' => $user]);
         }
-        return 'not lol';
+        return 'not lol';*/
     }
 
     public function register(Request $request){
 
-        if ($this->validateThis($request->all())->fails())
+        /*if ($this->validateThis($request->all())->fails())
             return 'wrong input';
         $user = DB::table('users')->where('email', $request->get('email'))->first();
         if ($user == null) {
             $this->create($request->only('email', 'password', 'asadmin'));
             return view ('firstpage');
         }
-        return 'not lol';
+        return 'not lol';*/
     }
 }
 

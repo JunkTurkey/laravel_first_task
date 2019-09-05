@@ -15,11 +15,13 @@ class UserTableSeeder extends Seeder
             'email' => str_random(10).'@god.damn',
             'password' => str_random(10),
             'role' => 1,
+            'picture_id' => 0,
         ]);
         DB::table('users')->insert([
             'email' => str_random(10).'@god.damn',
             'password' => str_random(10),
             'role' => 2,
+            'picture_id' => 0,
         ]);
     }
 }

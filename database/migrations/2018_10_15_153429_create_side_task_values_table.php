@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMailsTable extends Migration
+class CreateSideTaskValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mails', function (Blueprint $table) {
+        Schema::create('side_task_values', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('mail');
-            $table->unsignedInteger('user_id');
+            $table->string('text');
+            $table->integer('selected')->nullable();
+            $table->integer('checked')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mails');
+        Schema::dropIfExists('side_task_values');
     }
 }

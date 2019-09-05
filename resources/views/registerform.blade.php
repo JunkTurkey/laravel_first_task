@@ -1,11 +1,11 @@
 <html>
 
 <head>
-    <title>fuck u</title>
+    <title>refisterform</title>
 </head>
 
 <body>
-<h1>FUCK U</h1>
+<h1>refisterform</h1>
 <form method="post" action="{{ url('/register') }}" >
     @csrf
 
