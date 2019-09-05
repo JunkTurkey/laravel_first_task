@@ -20,12 +20,10 @@ class UserController extends Controller
     }
 
     public function sendMail(Request $request){
-        dd($request->all());
         $user = Auth::user();
         if ($this->validateEmail($request->all())->passes()){
             $this->createMail(['mail' => $request->get('message'), 'user_id' => DB::table('users')->
                 where('email', $user->email)->first()->id]);
-            return redirect('/user');
         }
         return 'not lol';
     }

@@ -1,10 +1,10 @@
 <html>
 
 @extends('layouts.layout')
-<head><title>admin</title></head>
+<head><title>mailsview</title></head>
 
 <body>
-<h1>fucking u right now</h1>
+<h1>mailsview</h1>
 <table class="table table-hover">
     <thead class="thead-light">
     <tr>

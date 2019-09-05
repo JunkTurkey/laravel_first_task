@@ -6,7 +6,8 @@
 </head>
 
 <body>
-<h1>Welcome, user</h1>
+<h3>Welcome, user</h3>
+<a href="{{ url('/sideTasks') }}" >side tasks</a>
 <a href="{{ url('/admin') }}">admin mode</a>
 <div>
     <?php $user = Auth::user(); ?>

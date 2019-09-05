@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>fuck u</title>
+    <title>firstpage</title>
 </head>
 
 <body>

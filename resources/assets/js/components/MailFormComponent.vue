@@ -2,8 +2,8 @@
         <div id="MailFormComponent">
             <h3>Send email</h3>
             <input v-model="mail.email" placeholder="example@your.domen" />
-            <textarea v-model="mail.message" placeholder="your message" />
-            <button @click.prevent="send">send</button>
+            <input v-model="mail.message" placeholder="your message" />
+            <button v-on:click="send">send</button>
         </div>
     </template>
 
@@ -21,7 +21,7 @@
             methods : {
                 send : function(){
                     console.log("do");
-                    axios.post('/sendmail', this.mail).then(response => {console.log("posle")});
+                    axios.post('/sendMail', this.mail).then(response => {console.log(response.data)});
                 }
             }
         };

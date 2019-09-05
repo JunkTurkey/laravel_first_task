@@ -8,10 +8,11 @@
 <script>
     import FirstComponent from "./FirstComponent";
     import MailFormComponent from "./MailFormComponent";
+    import SideTask from "./SideTask";
 
     export default {
         name: "App",
-        components: { MailFormComponent, FirstComponent }
+        components: { MailFormComponent, FirstComponent, SideTask }
     };
 </script>
 

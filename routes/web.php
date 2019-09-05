@@ -29,7 +29,7 @@ Route::get('/autho', function () {
 
 Route::post('/authorization', 'RegOrAuthController@auth');
 
-Route::post('/sendmail', 'UserController@sendMail');
+Route::post('/sendMail', 'UserController@sendMail');
 
 Route::get('/user', function (){
    return view('userview');
@@ -50,3 +50,9 @@ Route::get('/signout', function (){
    Auth::logout();
    return redirect('/');
 });
+
+Route::get('/sideTasks', function (){
+    return view('sidetask');
+});
+
+Route::post('/sideTask1', 'SideTaskController@firstSideTaskBlock1');
